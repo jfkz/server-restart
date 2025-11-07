@@ -12,11 +12,11 @@ export async function POST(request: Request) {
 
     const APP_PASSWORD = process.env.APP_PASSWORD ?? '';
     if (!APP_PASSWORD) {
-      return NextResponse.json({ ok: false }, { status: 500 });
+      return NextResponse.json({ ok: false, error: 'APP_PASSWORD not set' }, { status: 500 });
     }
 
     if (providedPassword !== APP_PASSWORD) {
-      return NextResponse.json({ ok: false }, { status: 401 });
+      return NextResponse.json({ ok: false, error: 'Invalid password' }, { status: 401 });
     }
 
     const {
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     } = process.env as Record<string, string | undefined>;
 
     if (!SSH_HOST || !SSH_USER || (!SSH_PASSWORD && !SSH_PRIVATE_KEY)) {
-      return NextResponse.json({ ok: false }, { status: 500 });
+      return NextResponse.json({ ok: false, error: 'SSH_HOST, SSH_USER, and SSH_PASSWORD or SSH_PRIVATE_KEY are required' }, { status: 500 });
     }
 
     const commands = (SSH_COMMAND ?? '')
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       .map((s) => s.trim())
       .filter(Boolean);
     if (commands.length === 0) {
-      return NextResponse.json({ ok: false }, { status: 500 });
+      return NextResponse.json({ ok: false, error: 'SSH_COMMAND is empty' }, { status: 500 });
     }
 
     // Notify via Telegram that a restart was triggered

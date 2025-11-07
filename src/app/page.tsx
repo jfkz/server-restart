@@ -30,7 +30,7 @@ export default function Home() {
       });
       const data = await res.json();
       if (!data.ok) {
-        setError("Request failed. Please check your password.");
+        setError(`Request failed. ${data.error || "Unknown error"}`);
       } else {
         // Only start cooldown if request succeeded
         setCooldownUntil(Date.now() + 60_000);
