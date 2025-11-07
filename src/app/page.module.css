@@ -23,8 +23,8 @@
   width: 100%;
   max-width: 800px;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   background-color: var(--foreground);
   padding: 120px 60px;
 }
@@ -61,12 +61,7 @@
 }
 
 .ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+  display: none;
 }
 
 .ctas a {
@@ -84,13 +79,40 @@
 }
 
 a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+  display: none;
 }
 
 a.secondary {
-  border-color: var(--button-secondary-border);
+  display: none;
+}
+
+.input {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+
+.button {
+  appearance: none;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #7c3aed;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.result {
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-height: 80px;
 }
 
 /* Enable hover only on non-touch devices */
