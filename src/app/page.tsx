@@ -62,7 +62,7 @@ export default function Home() {
             disabled={loading || isCoolingDown}
           />
           <button className={styles.button} onClick={run} disabled={loading || !password || isCoolingDown}>
-            {loading ? "Running..." : isCoolingDown ? "Wait 60s" : "Run"}
+            {loading ? "Running..." : isCoolingDown ? "Wait 60s" : "Restart"}
           </button>
           {error && <div style={{ color: "red" }}>{error}</div>}
           {/* No command output shown per requirements */}
