@@ -27,11 +27,9 @@ export async function runRemoteCommands({
   commands,
   timeoutMs = 120000,
 }: SSHOptions): Promise<SSHResult> {
-  console.log('Running SSH commands:', commands);
   if (!host || !username || (!password && !privateKey)) {
     throw new Error('Missing SSH configuration: host, username, and password or privateKey are required');
   }
-  console.log('SSHClientCtor:', SSHClientCtor);
 
   const conn = new SSHClientCtor();
 
@@ -64,7 +62,6 @@ export async function runRemoteCommands({
     let timer: NodeJS.Timeout | undefined;
     conn
       .on('ready', () => {
-        console.log('SSH connection ready');
         conn.exec(commandString, { pty: true }, (err: Error | undefined, stream: any) => {
           if (err) {
             clearTimeout(timer);
@@ -95,7 +92,6 @@ export async function runRemoteCommands({
         });
       })
       .on('error', (err: Error) => {
-        console.log('SSH connection error:', err);
         clearTimeout(timer);
         reject(err);
       })

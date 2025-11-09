@@ -67,8 +67,6 @@ export async function POST(request: Request) {
       timeoutMs: SSH_TIMEOUT_MS ? Number(SSH_TIMEOUT_MS) : 120000,
     });
 
-    console.log('SSH result:', JSON.stringify(result));
-
     // Return minimal success without any command output
     return NextResponse.json({ ok: true });
   } catch (err) {
