@@ -1,3 +1,5 @@
+import { Client as SSHClientCtor } from 'ssh2';
+
 // Defer loading ssh2 to runtime to avoid bundler issues
 
 export interface SSHOptions {
@@ -26,11 +28,10 @@ export async function runRemoteCommands({
   timeoutMs = 120000,
 }: SSHOptions): Promise<SSHResult> {
   console.log('Running SSH commands:', commands);
-  const SSHClientCtor = (eval as unknown as (code: string) => any)('require')('ssh2').Client as any;
-  console.log('SSHClientCtor:', SSHClientCtor);
   if (!host || !username || (!password && !privateKey)) {
     throw new Error('Missing SSH configuration: host, username, and password or privateKey are required');
   }
+  console.log('SSHClientCtor:', SSHClientCtor);
 
   const conn = new SSHClientCtor();
 
