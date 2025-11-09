@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       // Swallow Telegram errors to avoid blocking main operation
     }
 
-    await runRemoteCommands({
+    const result = await runRemoteCommands({
       host: SSH_HOST,
       port: SSH_PORT ? Number(SSH_PORT) : 22,
       username: SSH_USER,
@@ -66,6 +66,8 @@ export async function POST(request: Request) {
       commands,
       timeoutMs: SSH_TIMEOUT_MS ? Number(SSH_TIMEOUT_MS) : 120000,
     });
+
+    console.log('SSH result:', JSON.stringify(result));
 
     // Return minimal success without any command output
     return NextResponse.json({ ok: true });
